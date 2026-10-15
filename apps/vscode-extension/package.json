@@ -1,0 +1,29 @@
+{
+  "name": "promptpulse", "displayName": "PromptPulse", "description": "Live selected-text token estimates, native sidebar, and local usage imports for VS Code and compatible Antigravity editors.",
+  "version": "0.1.0", "publisher": "promptpulse-local", "engines": { "vscode": "^1.99.0" },
+  "categories": ["Other"], "main": "./dist/extension.cjs", "license": "MIT", "extensionKind": ["ui"],
+  "activationEvents": ["onStartupFinished"],
+  "contributes": { "commands": [
+    { "command": "promptpulse.openOverview", "title": "PromptPulse: Open Sidebar", "icon": "$(pulse)" },
+    { "command": "promptpulse.refreshUsage", "title": "PromptPulse: Refresh Saved Usage", "icon": "$(refresh)" },
+    { "command": "promptpulse.countSelection", "title": "PromptPulse: Count Selected Tokens" },
+    { "command": "promptpulse.importTelemetry", "title": "PromptPulse: Import Usage or Copilot Telemetry", "icon": "$(cloud-download)" },
+    { "command": "promptpulse.startWatchingTelemetry", "title": "PromptPulse: Start Watching Telemetry File", "icon": "$(eye)" },
+    { "command": "promptpulse.stopWatchingTelemetry", "title": "PromptPulse: Stop Watching Telemetry File", "icon": "$(debug-stop)" },
+    { "command": "promptpulse.openDashboard", "title": "PromptPulse: Open Usage Details", "icon": "$(graph)" },
+    { "command": "promptpulse.exportData", "title": "PromptPulse: Export Usage Data" },
+    { "command": "promptpulse.deleteData", "title": "PromptPulse: Delete Local Data" }
+  ], "viewsContainers": { "activitybar": [{ "id": "promptpulse", "title": "PromptPulse", "icon": "media/pulse.svg" }] },
+  "views": { "promptpulse": [{ "id": "promptpulse.overview", "name": "Token usage" }] },
+  "menus": {
+    "view/title": [
+      { "command": "promptpulse.refreshUsage", "when": "view == promptpulse.overview", "group": "navigation@1" },
+      { "command": "promptpulse.importTelemetry", "when": "view == promptpulse.overview", "group": "navigation@2" },
+      { "command": "promptpulse.openDashboard", "when": "view == promptpulse.overview", "group": "navigation@3" },
+      { "command": "promptpulse.startWatchingTelemetry", "when": "view == promptpulse.overview && !promptpulse.watchingTelemetry", "group": "telemetry@1" },
+      { "command": "promptpulse.stopWatchingTelemetry", "when": "view == promptpulse.overview && promptpulse.watchingTelemetry", "group": "telemetry@1" }
+    ],
+    "editor/context": [{ "command": "promptpulse.countSelection", "when": "editorHasSelection", "group": "navigation@20" }]
+  } },
+  "dependencies": { "@promptpulse/core": "workspace:*", "@promptpulse/adapters": "workspace:*", "@promptpulse/storage": "workspace:*", "@promptpulse/ui": "workspace:*", "react": "^19.0.0", "react-dom": "^19.0.0" }
+}

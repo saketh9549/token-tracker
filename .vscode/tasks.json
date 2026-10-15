@@ -1,0 +1,3 @@
+{
+  "version": "2.0.0", "tasks": [{ "label": "build", "type": "shell", "command": "npm run build", "problemMatcher": [], "group": "build" }]
+}

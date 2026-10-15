@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3, "name": "PromptPulse", "version": "0.1.0",
+  "description": "Live token estimates inside ChatGPT, a draft meter, and private local usage history.",
+  "permissions": ["storage", "scripting"],
+  "optional_host_permissions": ["https://chatgpt.com/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "action": { "default_popup": "popup.html", "default_title": "PromptPulse — ChatGPT token meter", "default_icon": { "16": "icons/16.png", "32": "icons/32.png" } },
+  "options_page": "index.html", "minimum_chrome_version": "120",
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'" }
+}

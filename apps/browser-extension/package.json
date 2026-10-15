@@ -1,0 +1,1 @@
+{ "name": "@promptpulse/browser-extension", "version": "0.1.0", "private": true, "type": "module", "dependencies": { "@promptpulse/core": "workspace:*", "@promptpulse/adapters": "workspace:*", "@promptpulse/storage": "workspace:*" } }

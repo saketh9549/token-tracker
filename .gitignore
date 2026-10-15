@@ -1,0 +1,95 @@
+# JavaScript dependencies and package-manager caches
+node_modules/
+.pnpm-store/
+.npm/
+.yarn/cache/
+.yarn/unplugged/
+
+# Generated builds and extension installers (publish installers as release assets)
+dist/
+build/
+*.vsix
+*.crx
+*.tsbuildinfo
+
+# Test reports and temporary tool output
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+blob-report/
+.vite/
+.cache/
+.turbo/
+
+# Isolated editor profiles, local test installs, screenshots, and scratch files
+.local/
+.vscode-test/
+.antigravity-test/
+/tmp/
+/temp/
+*.tmp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment values and local authentication configuration
+.env
+.env.*
+!.env.example
+!.env.template
+.npmrc
+!.npmrc.example
+.secrets/
+secrets/
+.credentials/
+.aws/
+.azure/
+.gcloud/
+.ssh/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Local usage/history exports and databases can contain private conversations
+/data/
+/exports/
+/telemetry/
+/logs/
+*.jsonl
+*.ndjson
+# This reviewed fixture is synthetic and is required by adapter tests.
+!fixtures/telemetry/copilot-sample.jsonl
+promptpulse-export*.json
+promptpulse-sample*.json
+usage-v*.json*
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Personal editor state; retain the shared development launch/tasks configuration
+.idea/
+.history/
+*.code-workspace
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini

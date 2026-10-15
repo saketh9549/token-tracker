@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { unzipSync, strFromU8 } from 'fflate';
+
+const version = JSON.parse(await readFile('apps/browser-extension/manifest.json', 'utf8')).version;
+const browser = unzipSync(await readFile(`dist/promptpulse-browser-${version}.zip`));
+const editor = unzipSync(await readFile(`dist/promptpulse-${version}.vsix`));
+const readJson = (files, name) => { assert(files[name], `Missing ${name}`); return JSON.parse(strFromU8(files[name])); };
+const manifest = readJson(browser, 'manifest.json');
+assert.equal(manifest.manifest_version, 3);
+assert.deepEqual(manifest.optional_host_permissions, ['https://chatgpt.com/*']);
+assert.equal(manifest.options_page, 'index.html');
+for (const name of ['background.js', 'content.js', 'popup.html', 'popup.js', 'popup.css', 'index.html', 'INSTALL.md', ...Object.values(manifest.icons)]) assert(browser[name], `Browser bundle missing ${name}`);
+const html = strFromU8(browser['index.html']);
+assert(!/https?:\/\/|localhost|127\.0\.0\.1/.test(html), 'Extension history must load local packaged assets');
+for (const match of html.matchAll(/(?:src|href)="\.\/([^\"]+)"/g)) assert(browser[match[1]], `Missing packaged asset ${match[1]}`);
+const extension = readJson(editor, 'extension/package.json');
+assert(extension.contributes.viewsContainers.activitybar.some(view => view.id === 'promptpulse'));
+assert(extension.contributes.views.promptpulse.some(view => view.id === 'promptpulse.overview'));
+for (const command of ['openOverview', 'countSelection', 'startWatchingTelemetry', 'stopWatchingTelemetry', 'importTelemetry']) assert(extension.contributes.commands.some(item => item.command === `promptpulse.${command}`), `Missing editor command ${command}`);
+for (const name of ['extension.vsixmanifest', 'extension/dist/extension.cjs', 'extension/dist/webview.js', 'extension/dist/webview.css', 'extension/media/pulse.svg', 'extension/README.md']) assert(editor[name], `Editor bundle missing ${name}`);
+assert.equal(extension.dependencies, undefined, 'Installed bundle must not require workspace packages');
+assert(![...Object.keys(browser), ...Object.keys(editor)].some(name => name.includes('node_modules')));
+console.log(`Verified browser ZIP (${Object.keys(browser).length} files) and editor VSIX (${Object.keys(editor).length} files). Both contain local runtime assets, icons and extension entry points.`);

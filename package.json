@@ -1,0 +1,15 @@
+{
+  "name": "promptpulse", "version": "0.1.0", "private": true,
+  "packageManager": "pnpm@11.25.0", "engines": { "node": ">=22.12" },
+  "scripts": {
+    "dev": "vite apps/dashboard --config apps/dashboard/vite.config.ts --host 127.0.0.1 --port 5173",
+    "build": "vite build apps/dashboard --config apps/dashboard/vite.config.ts && node scripts/build-extensions.mjs",
+    "test": "vitest run", "typecheck": "tsc --noEmit", "check": "npm run typecheck && npm run test && npm run build",
+    "package:vscode": "npm run build && node scripts/package-vscode.mjs",
+    "package:browser": "npm run build && node scripts/package-browser.mjs",
+    "package:extensions": "npm run build && node scripts/package-browser.mjs && node scripts/package-vscode.mjs && node scripts/verify-packages.mjs",
+    "verify:packages": "node scripts/verify-packages.mjs"
+  },
+  "devDependencies": { "@types/chrome": "^0.1.30", "@types/node": "^24.0.0", "@types/jsdom": "^21.1.7", "@types/react": "^19.0.0", "@types/react-dom": "^19.0.0", "@types/vscode": "^1.99.0", "@vitejs/plugin-react": "^5.0.0", "esbuild": "^0.25.0", "jsdom": "^26.0.0", "typescript": "^5.9.0", "vite": "^7.0.0", "vitest": "^3.2.0", "fflate": "^0.8.2", "fake-indexeddb": "^6.0.0" },
+  "license": "MIT"
+}

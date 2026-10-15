@@ -1,0 +1,6 @@
+# PromptPulse has no Python runtime, build, or test dependencies.
+# This file intentionally contains no pip packages.
+# Required tools: Node.js >=22.12 and pnpm 11.25.0.
+# Install JavaScript dependencies with: pnpm install --frozen-lockfile
+# Dependency definitions: package.json, apps/*/package.json,
+# packages/*/package.json, and pnpm-lock.yaml.

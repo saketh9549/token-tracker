@@ -1,0 +1,1 @@
+{ "name": "@promptpulse/dashboard", "version": "0.1.0", "private": true, "type": "module", "scripts": { "dev": "vite --host 127.0.0.1 --port 5173", "build": "vite build" }, "dependencies": { "@promptpulse/ui": "workspace:*", "@promptpulse/storage": "workspace:*", "react": "^19.0.0", "react-dom": "^19.0.0" } }
